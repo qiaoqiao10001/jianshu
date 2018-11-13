@@ -1,9 +1,11 @@
-import React from 'react'
-import { CSSTransition } from 'react-transition-group'
-import {connect} from 'react-redux'
+import React from 'react';
+import { CSSTransition } from 'react-transition-group';
+import {connect} from 'react-redux';
+import { actionCreators } from './store';
 import {
     HeaderWrapper, Logo, Nav, NavItem, NavSearch, Addition, Button, SearchWrap
 } from './style'
+
 
 const Header = (props) => {
     return(
@@ -51,16 +53,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return{
         handleInputFocus(){
-            const action = {
-                type:'focus_input'
-            }
-            dispatch(action)
+            //const action = actionCreators.
+            dispatch(actionCreators.input_Focus())
         },
         handleInputBlur(){
-            const action = {
-                type:'blur_input'
-            }
-            dispatch(action)
+            // const action = {
+            //     type:'blur_input'
+            // }
+            dispatch(actionCreators.input_Blur())
         }
     }
 }
