@@ -3,9 +3,26 @@ import { CSSTransition } from 'react-transition-group';
 import {connect} from 'react-redux';
 import { actionCreators } from './store';
 import {
-    HeaderWrapper, Logo, Nav, NavItem, NavSearch, Addition, Button, SearchWrap
+    HeaderWrapper, Logo, Nav, NavItem, NavSearch, Addition, Button, SearchWrap,SearchInfo,SearchInfoTitle,SearchInfoChange,SearchInfoItem
 } from './style'
 
+const getListArea = (show) => {
+    if(show){
+        return(
+            <SearchInfo>
+                <SearchInfoTitle>热门搜索</SearchInfoTitle>
+                <SearchInfoChange>换一批</SearchInfoChange>
+                <div>
+                    <SearchInfoItem>教育</SearchInfoItem>
+                    <SearchInfoItem>生活</SearchInfoItem>
+                    <SearchInfoItem>科技</SearchInfoItem>
+                </div>
+            </SearchInfo>
+        )
+    }else{
+        return null
+    }
+}
 
 const Header = (props) => {
     return(
@@ -32,7 +49,7 @@ const Header = (props) => {
                     </CSSTransition>
                     <i className = {
                         props.focused ? 'focused iconfont' : 'iconfont'} > &#xe63d; </i>
-
+                    {getListArea(props.focused)}
                 </SearchWrap>
             </Nav>
             <Addition>
@@ -47,7 +64,9 @@ const Header = (props) => {
 
 const mapStateToProps = (state) => {
     return{
-        focused: state.header.focused
+        focused: state.getIn(['header','focused'])
+        //从header 总的reducer里面找focus的值
+        //focused: state.get('header').get('focused')
     }
 }
 const mapDispatchToProps = (dispatch) => {
