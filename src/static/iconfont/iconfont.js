@@ -3,7 +3,7 @@ import {
   createGlobalStyle
 } from 'styled-components'
 
-export const Globalstyle_icon = createGlobalStyle `
+export const Globalstyleicon = createGlobalStyle `
 @font-face {
     font-family: "iconfont";
     src: url('./iconfont.eot?t=1542078646341'); /* IE9*/
