@@ -8,10 +8,22 @@ export const input_Focus = () => ({
 export const input_Blur = () => ({
     type:constants.BLUR_INPUT
 })
+export const mouseEnter = () => ({
+    type:constants.MOUSE_ENTER
+})
 
+export const mouseLeave = () =>({
+    type:constants.MOUSE_LEAVE
+})
+
+export const ChangePage = (page) =>({
+    type:constants.CHANGE_PAGE,
+    page
+})
 const changeList = (data) => ({
     type:constants.CHANGE_LIST,
-    data:fromJS(data)
+    data:fromJS(data),
+    totalPage:Math.ceil(data.length / 10)
 })
 
 export const getList = () => {   //有了react-thunk之后可以在actionCreators里面写函数
@@ -22,7 +34,7 @@ export const getList = () => {   //有了react-thunk之后可以在actionCreator
                 dispatch(changeList(data.data))
             }
         ).catch((res) => {
-
+            console.log(res);
         })
     }
 }

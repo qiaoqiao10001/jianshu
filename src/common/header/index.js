@@ -7,22 +7,32 @@ import {
 } from './style'
 
 class Header extends React.Component{
-    constructor(props){
-        super(props)
-    }
 
     getListArea = () => {
-        if(this.props.focused){
+        const {focused,list,page,mouseIn,handleMouseEnter,handleMouseLeave,handleChangePage,totalPage} = this.props;
+        const newList = list.toJS();
+        const pageList = []
+        if(newList.length){
+            for(let i = (page-1)*10;i<page*10;i++){
+                pageList.push(
+                    <SearchInfoItem key={newList[i]}>{newList[i]}</SearchInfoItem>
+                )
+            }
+        }
+        if(focused || mouseIn){
             return(
-                <SearchInfo>
+                <SearchInfo
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
                     <SearchInfoTitle>热门搜索</SearchInfoTitle>
-                    <SearchInfoChange>换一批</SearchInfoChange>
+                    <SearchInfoChange onClick={() => handleChangePage(page,totalPage)}>换一批</SearchInfoChange>
                     <div>
-
                         {
-                            this.props.list.map((item) => {
-                                return  <SearchInfoItem key={item}>{item}</SearchInfoItem>
-                            })
+                            // list.map((item) => {
+                            //     return  <SearchInfoItem key={item}>{item}</SearchInfoItem>
+                            // })
+                            pageList
                         }
                     </div>
                 </SearchInfo>
@@ -33,6 +43,7 @@ class Header extends React.Component{
     }
 
     render(){
+        const {focused,handleInputFocus,handleInputBlur,list} = this.props
         return(
                 <HeaderWrapper>
                     <Logo/>
@@ -45,18 +56,18 @@ class Header extends React.Component{
                         </NavItem >
                         <SearchWrap>
                             <CSSTransition
-                                in={this.props.focused}
+                                in={focused}
                                 timeout={200}
                                 classNames='slide'
                             >
                                 <NavSearch
-                                    className={this.props.focused? 'focused' : '' }
-                                    onFocus={this.props.handleInputFocus}
-                                    onBlur={this.props.handleInputBlur}
+                                    className={focused? 'focused' : '' }
+                                    onFocus={() => handleInputFocus(list)}
+                                    onBlur={handleInputBlur}
                                 />
                             </CSSTransition>
                             <i className = {
-                                this.props.focused ? 'focused iconfont' : 'iconfont'} > &#xe63d; </i>
+                                focused ? 'focused iconfont' : 'iconfont'} > &#xe63d; </i>
                             {this.getListArea()}
                         </SearchWrap>
                     </Nav>
@@ -73,23 +84,43 @@ class Header extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    console.log(state,'1111111111111state');
     return{
         focused: state.getIn(['header','focused']),
         //从header 总的reducer里面找focus的值
         //focused: state.get('header').get('focused')
-        list:state.getIn(['header','list'])
-
+        list:state.getIn(['header','list']),
+        page:state.getIn(['header','page']),
+        mouseIn: state.getIn(['header','mouseIn']),
+        totalPage:state.getIn(['header','totalPage'])
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return{
-        handleInputFocus(){
+        handleInputFocus(list){
+            //console.log(list)
+            if(list.size === 0){
+                dispatch(actionCreators.getList())
+            }
             dispatch(actionCreators.input_Focus())
-            dispatch(actionCreators.getList())
+
         },
         handleInputBlur(){
             dispatch(actionCreators.input_Blur())
+        },
+        handleMouseEnter(){
+            dispatch(actionCreators.mouseEnter())
+        },
+        handleMouseLeave(){
+            dispatch(actionCreators.mouseLeave())
+        },
+        handleChangePage(page,totalPage){
+            console.log(page,totalPage)
+            if(page<totalPage){
+                dispatch(actionCreators.ChangePage(page+1))
+            }else{
+                dispatch(actionCreators.ChangePage(1))
+            }
+
         }
     }
 }
