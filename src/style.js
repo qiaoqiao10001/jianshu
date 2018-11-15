@@ -3,11 +3,11 @@ import {createGlobalStyle} from 'styled-components'
 
 export const Globalstyle = createGlobalStyle `@font - face {
 html {
-    overflow - x: auto;
-    overflow - y: scroll;
+    overflow-x: auto;
+    overflow-y: scroll;
 }
 body, dl, dt, dd, ul, ol, li, pre, form, fieldset, input, p, blockquote, th, td {
-    font - weight: 400;
+    font-weight: 400;
     margin: 0;
     padding: 0;
 }
@@ -85,9 +85,9 @@ margin-left:-1px;
 
 hr {
 
-border-bottom:1px solid # FFFFFF;
-    border - top: 1 px solid# E4E4E4;
-    border - width: 1 px 0;
+border-bottom:1px solid #FFFFFF;
+    border-top: 1 px solid# E4E4E4;
+    border-width: 1 px 0;
     clear: both;
     height: 2 px;
     margin: 5 px 0;
@@ -99,7 +99,7 @@ ol, ul {
     list - style - type: none;
 }
 caption, th {
-    text - align: left;
+    text-align: left;
 }
 q: before, q: after, blockquote: before, blockquote: after {
     content: ””;
