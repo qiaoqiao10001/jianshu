@@ -146,7 +146,7 @@ export const WriterList = styled.div`
 `
 
 export const WriterMore = styled.a`
-display:block;
+    display:block;
     width:99%;
     height:36px;
     line-height:36px;
@@ -154,4 +154,15 @@ display:block;
     color:#787878;
     font-size:13px;border: 1px solid #dcdcdc;
     border-radius:4px;background-color: #f7f7f7;
+`
+export const LoadMore = styled.div`
+    width:100%;
+    color:#fff;
+    height:40px;
+    line-height:40px;
+    text-align:center;
+    margin:30px 0;
+    cursor:pointer; 
+    background:#a5a5a5;
+    border-radius:20px;
 `

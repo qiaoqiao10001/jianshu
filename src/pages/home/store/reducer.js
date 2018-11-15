@@ -5,7 +5,8 @@ const defaultState = fromJS({
     topicList:[],
     articleList:[],
     recommendList:[],
-    writerList:[]
+    writerList:[],
+    articlePage:1
 });
 export default (state=defaultState,action) => {
 
@@ -19,7 +20,11 @@ export default (state=defaultState,action) => {
                     writerList:fromJS(action.writerList)
                 })
             )
-
+        case constants.ADD_ARTICLE_LIST:
+            return state.merge({
+                'articleList': state.get('articleList').concat(action.list),
+                'articlePage':action.nextpage
+            })
         default:
             return state;
     }
