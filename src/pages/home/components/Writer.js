@@ -16,7 +16,7 @@ class Writer extends Component{
                         return(
                             <WriterList key={item.get('id')}>
                                 <div>
-                                    <a className='avatar'>
+                                    <a href='#' className='avatar'>
                                         <img src={item.get('imgUrl')} alt=""/>
                                     </a>
                                     <a className='attention'>
