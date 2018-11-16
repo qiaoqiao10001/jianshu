@@ -9,21 +9,22 @@ import store from './store'
 import {Provider} from 'react-redux'
 
 
+
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-          <div>
-            <Globalstyle/>
-            <Header/>
-              <BrowserRouter>
+          <BrowserRouter>
+            <div>
+                <Globalstyle/>
+                <Globalstyleicon/>
+                <Header/>
                   <div>
-                    <Route path='/' exact redirect='/home' component={Home}/>
-                    <Route path='/detail' component={Detail}/>
+                    <Route path='/'  exact component={Home}/>
+                    <Route path='/detail' exact component={Detail}/>
                   </div>
-              </BrowserRouter>
-            <Globalstyleicon/>
-          </div>
+            </div>
+      </BrowserRouter>
       </Provider>
     );
   }
