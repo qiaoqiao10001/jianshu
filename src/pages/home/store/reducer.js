@@ -6,25 +6,39 @@ const defaultState = fromJS({
     articleList:[],
     recommendList:[],
     writerList:[],
-    articlePage:1
+    articlePage:1,
+    showScroll:false
 });
+
+const homeDataChange = (state,action) => {  //把action中处理数据单独提出来
+    return (
+        state.merge({
+        topicList:fromJS(action.topicList),
+        articleList:fromJS(action.articleList),
+        recommendList: fromJS(action.recommendList),
+        writerList:fromJS(action.writerList)
+    })
+    )
+}
+
+const addArticleList = (state,action) => {
+    return(
+        state.merge({
+            'articleList': state.get('articleList').concat(action.list),
+            'articlePage':action.nextpage
+        })
+    )
+}
+
 export default (state=defaultState,action) => {
 
     switch (action.type) {
         case constants.CHANGE_HOME_DATA:
-            return(
-                state.merge({
-                    topicList:fromJS(action.topicList),
-                    articleList:fromJS(action.articleList),
-                    recommendList: fromJS(action.recommendList),
-                    writerList:fromJS(action.writerList)
-                })
-            )
+            return homeDataChange(state,action)
         case constants.ADD_ARTICLE_LIST:
-            return state.merge({
-                'articleList': state.get('articleList').concat(action.list),
-                'articlePage':action.nextpage
-            })
+            return addArticleList(state,action)
+        case constants.TOGGLE_TOP_SHOW:
+            return state.set('showScroll',action.show)
         default:
             return state;
     }
