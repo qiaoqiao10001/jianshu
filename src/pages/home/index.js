@@ -61,7 +61,6 @@ const mapDispatchToProps = (dispatch) => ({
         }else{
             dispatch(actionCreators.toggleTopShow(false))
         }
-        console.log(document.documentElement.scrollTop)
     }
 })
 

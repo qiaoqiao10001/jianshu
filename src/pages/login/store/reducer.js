@@ -2,8 +2,7 @@ import {fromJS} from 'immutable'  //把js对象转化为imutable对象
 import * as constants from './constants'
 
 const defaultState = fromJS({
-    title:'',
-    content:''
+    login:false
 });
 
 
@@ -11,11 +10,10 @@ const defaultState = fromJS({
 export default (state=defaultState,action) => {
 
     switch (action.type) {
-        case constants.CHANGE_DETAIL:
-            return state.merge({
-                title:action.title,
-                content:action.content
-            })
+        case constants.CHANGE_LOGIN:
+            return state.set('login',action.value);
+        case constants.LOG_OUT:
+            return state.set('login',action.value);
         default:
             return state;
     }
