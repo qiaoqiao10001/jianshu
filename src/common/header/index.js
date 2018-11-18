@@ -82,10 +82,15 @@ class Header extends React.Component{
                         </SearchWrap>
                     </Nav>
                     <Addition>
+                        <Link to='/write'>
+
                         <Button className = 'writting'>
                             < i className = "iconfont" >&#xe632; </i>
                             写文章</Button>
+                        </Link>
                         <Button className='reg'>注册</Button>
+
+
                     </Addition>
                 </HeaderWrapper>
             )
