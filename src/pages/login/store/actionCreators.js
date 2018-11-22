@@ -13,7 +13,7 @@ export const logout = () => ({
 
 export const login = (account,password) => {
     return (dispatch) => {
-        axios.get('/api/login.json?account='+account+'&password='+password).then((res) => {
+        axios.get('/api/login?account='+account+'&password='+password).then((res) => {
             const result = res.data.success;
             if(result){
                 //如果登录成功，把store里面的数据从false改为true
