@@ -28,7 +28,7 @@ const changeList = (data) => ({
 
 export const getList = () => {   //有了react-thunk之后可以在actionCreators里面写函数
     return (dispatch) => {
-        axios.get('/api/headerlist').then((res) => {
+        axios.get('/api/headerlist.json').then((res) => {
                 const data = res.data;
                 //console.log(data);
                 dispatch(changeList(data.data))
